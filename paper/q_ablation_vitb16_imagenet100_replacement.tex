@@ -1,0 +1,68 @@
+\subsection{Newton--Schulz steps (\texorpdfstring{$q$}{q}) ablation under RR and US}
+\label{app:q-ablation}
+
+This subsection replaces the language-modeling $q$-ablation with a non-GPT
+architecture to test whether the effect of Newton--Schulz depth persists beyond
+decoder-only Transformers.  We use a ViT-Base/16 model trained on ImageNet-100,
+which has the same order of parameters as NanoGPT-124M and consists primarily
+of large dense attention and MLP matrices.  Thus, the experiment remains a
+natural testbed for Muon's matrix-valued momentum and polar-factor update.
+
+\paragraph{Setup.}
+We train a ViT-Base/16 model at input resolution $224\times224$ on ImageNet-100.
+The main optimizer is applied to hidden two-dimensional weight matrices
+(attention projections and MLP matrices), while classifier, normalization,
+bias, class-token, position-embedding, and patch-projection parameters are
+updated by a shared side AdamW optimizer in every cell.  We compare
+$\muon$-NS with $q\in\{1,3,5\}$ Newton--Schulz steps and a \textsc{SGDM}
+baseline under both random reshuffling (RR) and IID uniform sampling with
+replacement (US).  RR uses one fresh without-replacement permutation per epoch,
+whereas US draws the same number of examples per epoch with replacement.  We
+report training loss, validation loss, validation top-1 accuracy, and
+wall-clock time.
+
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{Final validation results for the ViT-Base/16 / ImageNet-100 $q$-ablation.}
+Mean $\pm$ one seed-level standard deviation; lower validation loss and higher top-1 accuracy are better.}
+\label{tab:q-ablation-vitb16-imagenet100-final}
+\begin{tabular}{lccc}
+\toprule
+Configuration & Train loss & Val. loss & Val. top-1 acc. \\
+\midrule
+\multicolumn{4}{l}{\emph{Random Reshuffling (RR)}} \\
+\quad $\muon$-NS, $q=1$ & -- & -- & -- \\
+\quad $\muon$-NS, $q=3$ & -- & -- & -- \\
+\quad $\muon$-NS, $q=5$ & -- & -- & -- \\
+\quad \textsc{SGDM} & -- & -- & -- \\
+\midrule
+\multicolumn{4}{l}{\emph{Uniform with replacement (US)}} \\
+\quad $\muon$-NS, $q=1$ & -- & -- & -- \\
+\quad $\muon$-NS, $q=3$ & -- & -- & -- \\
+\quad $\muon$-NS, $q=5$ & -- & -- & -- \\
+\quad \textsc{SGDM} & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.49\linewidth]{figures/vit_q_ablation_val_loss.pdf}
+    \includegraphics[width=0.49\linewidth]{figures/vit_q_ablation_val_acc.pdf}
+    \vspace{-0.2cm}
+    \caption{\textbf{Newton--Schulz steps ($q$) ablation on ViT-Base/16 / ImageNet-100.}
+    Left: validation loss versus epoch. Right: validation top-1 accuracy versus epoch.
+    Shaded regions denote one seed-level standard deviation.}
+    \label{fig:q-ablation-vitb16-imagenet100}
+\end{figure*}
+
+\paragraph{Interpretation.}
+The purpose of this ablation is not to compete with state-of-the-art ImageNet
+training recipes, but to isolate how the Newton--Schulz depth affects Muon under
+the two sampling regimes considered in this paper.  If increasing $q$ improves
+or rapidly saturates the Muon curves under both RR and US, this supports the
+role of the approximation factor $\zeta_q=(1+\varepsilon_q)^2/(1-\varepsilon_q)$
+in Theorem~\ref{thm:muonrr-ns-nonconvex}.  Comparing RR and US at fixed $q$
+then tests whether the reshuffling benefit persists for the same finite-$q$
+polar approximation.

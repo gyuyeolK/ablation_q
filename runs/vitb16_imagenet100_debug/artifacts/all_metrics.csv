@@ -1,0 +1,5 @@
+epoch,optimizer,sampling,q,seed,train_loss,train_acc,val_loss,val_acc,epoch_seconds,global_step,matrix_path_params,total_params,run_dir
+1,muon,rr,1,0,3.7517010002887896,0.1318888546798029,3.272395132446289,0.2082,187.8236153125763,1015,84934656,85875556,runs/vitb16_imagenet100_debug/model=vit_base_patch16_224_opt=muon_sampling=rr_q=1_seed=0
+1,muon,us,1,0,3.7441234861101433,0.1324353448275862,3.322760642242432,0.2,189.50941348075867,1015,84934656,85875556,runs/vitb16_imagenet100_debug/model=vit_base_patch16_224_opt=muon_sampling=us_q=1_seed=0
+1,sgdm,rr,0,0,3.825203360007901,0.1187115147783251,3.4139052227020263,0.1826,153.2875258922577,1015,84934656,85875556,runs/vitb16_imagenet100_debug/model=vit_base_patch16_224_opt=sgdm_sampling=rr_q=0_seed=0
+1,sgdm,us,0,0,3.818628489677542,0.1200046182266009,3.470766018295288,0.1758,152.7658896446228,1015,84934656,85875556,runs/vitb16_imagenet100_debug/model=vit_base_patch16_224_opt=sgdm_sampling=us_q=0_seed=0

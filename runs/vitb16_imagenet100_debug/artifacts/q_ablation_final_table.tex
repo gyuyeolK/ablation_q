@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{Final validation results for the ViT-Base/16 / ImageNet-100 $q$-ablation.} Mean $\pm$ one seed-level standard deviation; lower validation loss and higher top-1 accuracy are better.}
+\label{tab:q-ablation-vitb16-imagenet100-final}
+\begin{tabular}{lccc}
+\toprule
+Configuration & Train loss & Val. loss & Val. top-1 acc. \\
+\midrule
+\multicolumn{4}{l}{\emph{Random Reshuffling (RR)}} \\
+\quad $\muon$-NS, $q=1$ & 3.7517 $\pm$ 0.0000 & 3.2724 $\pm$ 0.0000 & 20.82 $\pm$ 0.00 \\
+\quad \textsc{SGDM} & 3.8252 $\pm$ 0.0000 & 3.4139 $\pm$ 0.0000 & 18.26 $\pm$ 0.00 \\
+\midrule
+\multicolumn{4}{l}{\emph{Uniform with replacement (US)}} \\
+\quad $\muon$-NS, $q=1$ & 3.7441 $\pm$ 0.0000 & 3.3228 $\pm$ 0.0000 & 20.00 $\pm$ 0.00 \\
+\quad \textsc{SGDM} & 3.8186 $\pm$ 0.0000 & 3.4708 $\pm$ 0.0000 & 17.58 $\pm$ 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}

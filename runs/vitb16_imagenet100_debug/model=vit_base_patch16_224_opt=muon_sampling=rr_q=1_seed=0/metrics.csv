@@ -1,0 +1,2 @@
+epoch,optimizer,sampling,q,seed,train_loss,train_acc,val_loss,val_acc,epoch_seconds,global_step,matrix_path_params,total_params
+1,muon,rr,1,0,3.7517010002887896,0.13188885467980296,3.272395132446289,0.2082,187.8236153125763,1015,84934656,85875556
