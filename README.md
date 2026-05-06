@@ -50,6 +50,20 @@ pip install -r requirements.txt
 
 ## Full q-ablation grid
 
+
+bash scripts/setup_imagenet100_devshm.sh
+
+
+DATA_ROOT=/dev/shm/datasets/imagenet100 \
+OUT_DIR=runs/vitb16_imagenet100_q_ablation \
+EPOCHS=30 \
+BATCH_SIZE=128 \
+SEEDS=0,1 \
+Q_VALUES=1,3,5 \
+NUM_GPUS=8 \
+NUM_WORKERS=4 \
+bash scripts/launch_full_grid_8gpu.sh
+
 ```bash
 DATA_ROOT=/path/to/imagenet100 \
 OUT_DIR=runs/vitb16_imagenet100_q_ablation \
